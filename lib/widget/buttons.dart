@@ -1,4 +1,6 @@
+import 'package:flatter_project/colors/colors.dart';
 import 'package:flatter_project/screens/login.dart';
+import 'package:flatter_project/screens/register.dart';
 import 'package:flutter/material.dart';
 
 class Tombol extends StatefulWidget {
@@ -25,10 +27,10 @@ class _TombolState extends State<Tombol> {
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(25.0))),
-                  side:
-                      MaterialStatePropertyAll(BorderSide(color: Colors.white)),
+                  side: MaterialStatePropertyAll(
+                      BorderSide(color: Colors.white54)),
                   backgroundColor:
-                      MaterialStatePropertyAll<Color>(Color(0xFF0E3241))),
+                      MaterialStatePropertyAll<Color>(AppColors.primaryColor)),
               onPressed: () {
                 // Masukkan fungsi untuk login di sini
               },
@@ -48,10 +50,10 @@ class _TombolState extends State<Tombol> {
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(25.0))),
-                  side:
-                      MaterialStatePropertyAll(BorderSide(color: Colors.white)),
+                  side: MaterialStatePropertyAll(
+                      BorderSide(color: Colors.white54)),
                   backgroundColor:
-                      MaterialStatePropertyAll<Color>(Color(0xFF0E3241))),
+                      MaterialStatePropertyAll<Color>(AppColors.primaryColor)),
               onPressed: () {
                 Navigator.push(
                   context,
@@ -80,12 +82,22 @@ class _TombolState extends State<Tombol> {
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(25.0))),
-                  side:
-                      MaterialStatePropertyAll(BorderSide(color: Colors.white)),
+                  side: MaterialStatePropertyAll(
+                      BorderSide(color: Colors.white54)),
                   backgroundColor:
-                      MaterialStatePropertyAll<Color>(Color(0xFF0E3241))),
+                      MaterialStatePropertyAll<Color>(AppColors.primaryColor)),
               onPressed: () {
-                // Masukkan fungsi untuk login di sini
+                Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    pageBuilder: (context, animation, secondaryAnimation) =>
+                        Register(),
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) {
+                      return FadeTransition(opacity: animation, child: child);
+                    },
+                  ),
+                );
               },
               child: Text(
                 'Daftar',

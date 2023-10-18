@@ -1,5 +1,6 @@
 import 'package:flatter_project/widget/loginButton.dart';
 import 'package:flatter_project/widget/textField.dart';
+import 'package:flatter_project/colors/colors.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -10,15 +11,40 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  bool _obscureText = true;
-
   TextEditingController _passwordTextController = TextEditingController();
   TextEditingController _emailTextController = TextEditingController();
 
-  void _toggle() {
-    setState(() {
-      _obscureText = !_obscureText;
-    });
+  void _login() {
+    String email = _emailTextController.text.trim();
+    String password = _passwordTextController.text.trim();
+
+    if (email.isEmpty || password.isEmpty) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          actionsPadding: EdgeInsets.fromLTRB(0, 0, 20, 10),
+          backgroundColor: AppColors.primaryColor,
+          title: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Icon(
+              Icons.warning,
+              color: Colors.white,
+            )
+          ]),
+          content: Text('Oops!  Ada yang belum di isi ..',
+              style: TextStyle(color: Colors.white)),
+          actions: [
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  foregroundColor: AppColors.primaryColor,
+                  backgroundColor: Colors.white),
+              onPressed: () => Navigator.pop(context),
+              child:
+                  Text('OK', style: TextStyle(color: AppColors.primaryColor)),
+            ),
+          ],
+        ),
+      );
+    }
   }
 
   @override
@@ -63,7 +89,12 @@ class _LoginState extends State<Login> {
                         controller: _passwordTextController,
                       ),
                       SizedBox(height: 25),
-                      ButtonLogin(context: context, isLogin: true, onTap: () {})
+                      ButtonLogin(
+                          context: context,
+                          isLogin: true,
+                          onTap: () {
+                            _login();
+                          })
                     ],
                   ),
                 ),
@@ -76,7 +107,10 @@ class _LoginState extends State<Login> {
               child: Row(
                 children: [
                   IconButton(
-                    icon: Icon(Icons.arrow_back, color: Colors.white),
+                    icon: Icon(
+                      Icons.arrow_back,
+                      color: Colors.white,
+                    ),
                     onPressed: () {
                       Navigator.pop(context);
                     },
@@ -85,7 +119,7 @@ class _LoginState extends State<Login> {
                     'Masuk',
                     style: TextStyle(
                         color: Colors.white,
-                        fontSize: 15,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold),
                   )
                 ],

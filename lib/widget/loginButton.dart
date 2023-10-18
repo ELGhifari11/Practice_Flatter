@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flatter_project/colors/colors.dart';
 
 class ButtonLogin extends StatefulWidget {
   final BuildContext context;
@@ -17,7 +18,7 @@ class _ButtonLoginState extends State<ButtonLogin> {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      height: 50,
+      height: 55,
       margin: const EdgeInsets.fromLTRB(0, 10, 0, 20),
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(90)),
       child: ElevatedButton(
@@ -34,7 +35,7 @@ class _ButtonLoginState extends State<ButtonLogin> {
             if (states.contains(MaterialState.pressed)) {
               return Colors.white70;
             }
-            return Color(0xFF0E3241);
+            return AppColors.primaryColor;
           }),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))),

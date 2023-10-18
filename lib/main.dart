@@ -197,6 +197,7 @@
 
 // ////////////////////////  SPLASH SCREEN   ///////////////////////////////////////////////////////////////
 
+import 'package:flatter_project/colors/colors.dart';
 import 'package:flatter_project/screens/splash.dart';
 import 'package:flutter/material.dart';
 
@@ -211,17 +212,18 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.light(
-          primary: Colors.white,
-        ), // warna fokus
-        inputDecorationTheme: InputDecorationTheme(
-            focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(
-                color: Colors.white,
-              ), // warna garis bawah saat fokus
-            ),
-            enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.white60))),
+        primarySwatch: Colors.blue,
+        colorScheme: ColorScheme.light().copyWith(
+          primary: AppColors.primaryColor, // warna untuk header
+          onPrimary: Colors.white, // warna teks di header
+          surface: Colors.purple, // background dialog
+          onSurface: Colors.black, // warna untuk teks dan icon
+        ),
+        textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(
+              primary:
+                  AppColors.primaryColor), // Warna untuk tombol OK dan CANCEL
+        ),
       ),
       home: Splash(),
     );
