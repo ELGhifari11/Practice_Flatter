@@ -20,7 +20,14 @@ class _ButtonLoginState extends State<ButtonLogin> {
       width: MediaQuery.of(context).size.width,
       height: 55,
       margin: const EdgeInsets.fromLTRB(0, 10, 0, 20),
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(90)),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(90),
+        gradient: LinearGradient(
+          begin: FractionalOffset(0, 2),
+          end: FractionalOffset(2, 2),
+          colors: [Colors.red, AppColors.primaryColor],
+        ),
+      ),
       child: ElevatedButton(
         onPressed: () {
           widget.onTap();
@@ -31,11 +38,10 @@ class _ButtonLoginState extends State<ButtonLogin> {
               color: Colors.white, fontWeight: FontWeight.w600, fontSize: 20),
         ),
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.resolveWith((states) {
-            if (states.contains(MaterialState.pressed)) {
-              return Colors.white70;
-            }
-            return AppColors.primaryColor;
+          backgroundColor: MaterialStateProperty.resolveWith<Color?>(
+              (Set<MaterialState> states) {
+            if (states.contains(MaterialState.pressed)) return Colors.white70;
+            return Colors.transparent; // Set to transparent
           }),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))),

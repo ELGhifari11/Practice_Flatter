@@ -23,7 +23,7 @@ class _LoginState extends State<Login> {
         context: context,
         builder: (context) => AlertDialog(
           actionsPadding: EdgeInsets.fromLTRB(0, 0, 20, 10),
-          backgroundColor: AppColors.primaryColor,
+          backgroundColor: AppColors.secondaryColor,
           title: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             Icon(
               Icons.warning,

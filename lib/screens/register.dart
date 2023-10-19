@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import 'package:flatter_project/colors/colors.dart';
+import 'package:flatter_project/widget/loginButton.dart';
 import 'package:flatter_project/widget/textField.dart';
+// import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -20,52 +22,65 @@ class _RegisterState extends State<Register> {
   TextEditingController _namaTextController = TextEditingController();
   TextEditingController _dateTextController = TextEditingController();
 
+  void _register() {
+    String email = _emailTextController.text.trim();
+    String password = _passwordTextController.text.trim();
+    String validatePass = _passwordVerifikasiTextController.text.trim();
+    String nama = _namaTextController.text.trim();
+    String date = _dateTextController.text.trim();
+
+    if (email.isEmpty ||
+        password.isEmpty ||
+        validatePass.isEmpty ||
+        nama.isEmpty ||
+        date.isEmpty ||
+        password != validatePass) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          actionsPadding: EdgeInsets.fromLTRB(0, 0, 20, 10),
+          backgroundColor: AppColors.secondaryColor,
+          title: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Icon(
+              Icons.warning,
+              color: Colors.white,
+            )
+          ]),
+          content: Text('Oops!  Ada yang belum di isi atau password tidak sama',
+              style: TextStyle(color: Colors.white)),
+          actions: [
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  foregroundColor: AppColors.primaryColor,
+                  backgroundColor: Colors.white),
+              onPressed: () => Navigator.pop(context),
+              child:
+                  Text('OK', style: TextStyle(color: AppColors.primaryColor)),
+            ),
+          ],
+        ),
+      );
+    }
+  }
+
   File? image;
 
-  Future getImage() async {
-    final ImagePicker _picker = ImagePicker();
-    final XFile? imagePicked =
-        await _picker.pickImage(source: ImageSource.camera);
-
-    if (imagePicked != null) {
-      // Tambahkan pengecekan ini
-      image = File(imagePicked.path);
-      setState(() {});
-    }
+  Future getImage(ImageSource source) async {
+    final ImagePicker picker = ImagePicker();
+    XFile? pickedImage = await picker.pickImage(source: source);
+    if (pickedImage != null) setState(() => image = File(pickedImage.path));
+    Navigator.pop(context);
   }
 
-  Future getGaleri() async {
-    final ImagePicker _picker = ImagePicker();
-    final XFile? photoPicked =
-        await _picker.pickImage(source: ImageSource.gallery);
-
-    if (photoPicked != null) {
-      // Tambahkan pengecekan ini
-      image = File(photoPicked.path);
-      setState(() {});
-    }
-  }
-
-  bool _pressed = false;
-  void _onTapDown(TapDownDetails details) {
-    setState(() {
-      _pressed = true;
-    });
-  }
-
-  void _onTapUp(TapUpDetails details) {
-    setState(() {
-      _pressed = false;
-    });
+  void showDialogBox() {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         actionsPadding: EdgeInsets.fromLTRB(0, 0, 20, 10),
-        backgroundColor: AppColors.primaryColor,
+        backgroundColor: AppColors.secondaryColor,
         title: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           Icon(Icons.camera_alt, color: Colors.white),
           SizedBox(width: 10),
-          // memberikan jarak antara dua ikon
           Icon(Icons.image, color: Colors.white)
         ]),
         iconColor: Colors.white,
@@ -76,20 +91,14 @@ class _RegisterState extends State<Register> {
             style: ElevatedButton.styleFrom(
                 foregroundColor: AppColors.primaryColor,
                 backgroundColor: Colors.white),
-            onPressed: () {
-              getImage();
-              Navigator.pop(context);
-            },
+            onPressed: () => getImage(ImageSource.camera),
             child: Icon(Icons.camera_alt, color: AppColors.primaryColor),
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
                 foregroundColor: AppColors.primaryColor,
                 backgroundColor: Colors.white),
-            onPressed: () {
-              getGaleri();
-              Navigator.pop(context);
-            },
+            onPressed: () => getImage(ImageSource.gallery),
             child: Icon(Icons.image, color: AppColors.primaryColor),
           ),
         ],
@@ -97,41 +106,54 @@ class _RegisterState extends State<Register> {
     );
   }
 
+  bool _pressed = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      body: Stack(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('lib/images/bgg.png'),
-                fit: BoxFit.cover,
-              ),
+      body: Container(
+        decoration: BoxDecoration(
+            image: DecorationImage(
+          image: AssetImage('lib/images/bgg.png'),
+          fit: BoxFit.cover,
+        )),
+        child: CustomScrollView(
+          slivers: <Widget>[
+            SliverAppBar(
+              iconTheme: IconThemeData(color: Colors.white),
+              centerTitle: true,
+              title: Text('Daftar', style: TextStyle(color: Colors.white)),
+              backgroundColor: Colors.black.withOpacity(0.3),
+              floating: true,
+              snap: true,
+              elevation: 0,
+              flexibleSpace: FlexibleSpaceBar(background: Container()),
             ),
-          ),
-          SingleChildScrollView(
-              child: Container(
-                  child: Center(
-                      child: Column(
-            children: [
-              SizedBox(height: 130),
+            SliverToBoxAdapter(
+                child: Column(children: [
+              SizedBox(height: 30),
               GestureDetector(
-                onTapDown: _onTapDown,
-                onTapUp: _onTapUp,
-                // onTap: () {
-                //   _onTap();
-                //   print('Container ditekan!');
-                // },
+                onTapDown: (TapDownDetails details) {
+                  setState(() {
+                    _pressed = true;
+                  });
+                },
+                onTapUp: (TapUpDetails details) {
+                  setState(() {
+                    _pressed = false;
+                  });
+                  showDialogBox();
+                },
                 child: AnimatedContainer(
-                  duration: Duration(milliseconds: 50),
-                  width: !_pressed ? 320 : 310,
-                  height: !_pressed ? 170 : 160,
+                  duration: Duration(milliseconds: 100),
+                  width: !_pressed ? 320 : 300,
+                  height: !_pressed ? 270 : 250,
                   decoration: BoxDecoration(
                     borderRadius: !_pressed
                         ? BorderRadius.circular(10)
                         : BorderRadius.circular(5),
+                    border: Border.all(color: AppColors.primaryColor),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.white.withOpacity(0.1),
@@ -145,7 +167,6 @@ class _RegisterState extends State<Register> {
                             image: FileImage(image!),
                             fit: BoxFit.cover,
                           )
-                        // Tambahkan pengecekan ini
                         : DecorationImage(
                             image: AssetImage('lib/images/icon1.png'),
                             fit: BoxFit.cover,
@@ -204,32 +225,17 @@ class _RegisterState extends State<Register> {
                   controller: _passwordVerifikasiTextController,
                 ),
               ),
-            ],
-          )))),
-          Container(
-              padding: EdgeInsets.fromLTRB(
-                  15, MediaQuery.of(context).size.height * 0.06, 0, 0),
-              child: Row(
-                children: [
-                  IconButton(
-                    icon: Icon(
-                      Icons.arrow_back,
-                      color: Colors.white,
-                    ),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  Text(
-                    'Masuk',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold),
-                  )
-                ],
-              )),
-        ],
+              Container(
+                  margin: EdgeInsets.fromLTRB(25, 0, 25, 20),
+                  child: ButtonLogin(
+                      context: context,
+                      isLogin: false,
+                      onTap: () {
+                        _register();
+                      })),
+            ]))
+          ],
+        ),
       ),
     );
   }

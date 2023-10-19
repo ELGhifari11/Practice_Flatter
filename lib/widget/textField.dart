@@ -63,7 +63,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         filled: true,
         floatingLabelAlignment: FloatingLabelAlignment.center,
         floatingLabelBehavior: FloatingLabelBehavior.auto,
-        fillColor: Colors.white.withOpacity(0.08),
+        fillColor: Colors.white.withOpacity(0.1),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(50),
           borderSide: BorderSide(color: Colors.white),
@@ -74,7 +74,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(40),
-          borderSide: BorderSide(color: Colors.white54),
+          borderSide: BorderSide(color: AppColors.primaryColor),
         ),
       ),
       keyboardType: widget.isPasswordType
@@ -139,7 +139,7 @@ class _CustomFieldState extends State<CustomField> {
               filled: true,
               floatingLabelAlignment: FloatingLabelAlignment.center,
               floatingLabelBehavior: FloatingLabelBehavior.auto,
-              fillColor: Colors.white.withOpacity(0.08),
+              fillColor: Colors.white.withOpacity(0.1),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(50),
                 borderSide: BorderSide(color: Colors.white),
@@ -150,7 +150,7 @@ class _CustomFieldState extends State<CustomField> {
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(40),
-                borderSide: BorderSide(color: Colors.white54),
+                borderSide: BorderSide(color: AppColors.primaryColor),
               )),
         ),
       ),
@@ -181,10 +181,10 @@ class _CustomFieldGenderState extends State<CustomFieldGender> {
     return Container(
         padding: EdgeInsets.symmetric(horizontal: 20.0),
         decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.08),
+          color: Colors.white.withOpacity(0.1),
           borderRadius: BorderRadius.circular(40),
           border: Border.all(
-            color: Colors.white54,
+            color: AppColors.primaryColor,
             width: 1,
           ),
         ),
