@@ -1,17 +1,22 @@
 import 'package:flatter_project/colors/colors.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class CustomTextField extends StatefulWidget {
   final String text;
   final IconData icon;
   final bool isPasswordType;
   final TextEditingController controller;
+  late Color borderColor;
+  late Color borderFocusColor;
 
-  const CustomTextField({
+  CustomTextField({
     required this.text,
     required this.icon,
-    required this.isPasswordType,
+    this.isPasswordType = false,
     required this.controller,
+    this.borderColor = Colors.white,
+    this.borderFocusColor = AppColors.primaryColor,
   });
 
   @override
@@ -70,11 +75,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(color: Colors.white),
+          borderSide: BorderSide(color: widget.borderFocusColor),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(40),
-          borderSide: BorderSide(color: AppColors.primaryColor),
+          borderSide: BorderSide(color: widget.borderColor),
         ),
       ),
       keyboardType: widget.isPasswordType
@@ -146,11 +151,11 @@ class _CustomFieldState extends State<CustomField> {
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(color: Colors.white),
+                borderSide: BorderSide(color: AppColors.primaryColor),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(40),
-                borderSide: BorderSide(color: AppColors.primaryColor),
+                borderSide: BorderSide(color: Colors.white),
               )),
         ),
       ),
@@ -184,7 +189,7 @@ class _CustomFieldGenderState extends State<CustomFieldGender> {
           color: Colors.white.withOpacity(0.1),
           borderRadius: BorderRadius.circular(40),
           border: Border.all(
-            color: AppColors.primaryColor,
+            color: Colors.white,
             width: 1,
           ),
         ),
@@ -197,7 +202,7 @@ class _CustomFieldGenderState extends State<CustomFieldGender> {
           Expanded(
               child: Theme(
             data: Theme.of(context).copyWith(
-              canvasColor: AppColors.primaryColor,
+              canvasColor: AppColors.secondaryColor,
             ),
             child: DropdownButtonHideUnderline(
               child: DropdownButton<String>(

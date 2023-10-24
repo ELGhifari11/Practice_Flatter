@@ -1,7 +1,7 @@
 import 'package:flatter_project/colors/colors.dart';
-import 'package:flatter_project/screens/login.dart';
-import 'package:flatter_project/screens/register.dart';
+import 'package:flatter_project/routes/routeName.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Tombol extends StatefulWidget {
   const Tombol({
@@ -23,16 +23,8 @@ class _TombolState extends State<Tombol> {
               context: context,
               title: 'Scan ID',
               onTap: () {
-                Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                    pageBuilder: (context, animation, secondaryAnimation) =>
-                        Register(),
-                    transitionsBuilder:
-                        (context, animation, secondaryAnimation, child) {
-                      return FadeTransition(opacity: animation, child: child);
-                    },
-                  ),
+                Get.toNamed(
+                  Routename.login,
                 );
               },
               panjang: 250),
@@ -40,16 +32,8 @@ class _TombolState extends State<Tombol> {
               context: context,
               title: 'Masuk',
               onTap: () {
-                Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                    pageBuilder: (context, animation, secondaryAnimation) =>
-                        Login(),
-                    transitionsBuilder:
-                        (context, animation, secondaryAnimation, child) {
-                      return FadeTransition(opacity: animation, child: child);
-                    },
-                  ),
+                Get.toNamed(
+                  Routename.login,
                 );
               },
               panjang: 250),
@@ -57,16 +41,8 @@ class _TombolState extends State<Tombol> {
               context: context,
               title: 'Daftar',
               onTap: () {
-                Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                    pageBuilder: (context, animation, secondaryAnimation) =>
-                        Register(),
-                    transitionsBuilder:
-                        (context, animation, secondaryAnimation, child) {
-                      return FadeTransition(opacity: animation, child: child);
-                    },
-                  ),
+                Get.toNamed(
+                  Routename.register,
                 );
               },
               panjang: 250)

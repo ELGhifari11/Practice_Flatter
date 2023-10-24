@@ -1,4 +1,6 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+  package='com.EL.flutter_practice'>
+     
     <application
         android:label="Panther Mania"
         android:name="${applicationName}"
