@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flatter_project/colors/colors.dart';
 import 'package:flatter_project/routes/routeName.dart';
-import 'package:flatter_project/screens/login.dart';
 import 'package:flatter_project/widget/dialogCustom/customDialog.dart';
 import 'package:flatter_project/widget/loginButton.dart';
 import 'package:flatter_project/widget/textField.dart';
