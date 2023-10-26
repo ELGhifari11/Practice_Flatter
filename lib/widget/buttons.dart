@@ -1,5 +1,5 @@
 import 'package:flatter_project/colors/colors.dart';
-import 'package:flatter_project/routes/routeName.dart';
+import 'package:flatter_project/app/routes/routeName.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

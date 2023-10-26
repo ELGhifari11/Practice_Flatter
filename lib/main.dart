@@ -1,10 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flatter_project/colors/colors.dart';
-import 'package:flatter_project/controllers/authControllers.dart';
-import 'package:flatter_project/routes/pageRoute.dart';
-import 'package:flatter_project/routes/routeName.dart';
-import 'package:flatter_project/screens/home.dart';
-import 'package:flatter_project/screens/splash.dart';
+import 'package:flatter_project/app/controllers/authControllers.dart';
+import 'package:flatter_project/app/routes/pageRoute.dart';
+import 'package:flatter_project/app/routes/routeName.dart';
+import 'package:flatter_project/widget/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -13,10 +12,9 @@ import 'package:get/get.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: MyApp(),
-  ));
+  runApp(
+    MyApp(),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -39,16 +37,13 @@ class MyApp extends StatelessWidget {
                         TextButton.styleFrom(primary: AppColors.primaryColor)),
               ),
               initialRoute:
-                  snapshot.data != null ? Routename.home : Routename.splash,
-              // home: snapshot.data != null
-              //     ? Splash(customWidget: Home())
-              //     : Splash(customWidget: ScreenOptions()),
+                  snapshot.data != null && snapshot.data!.emailVerified == true
+                      ? Routename.homeSplash
+                      : Routename.splash,
               getPages: AppPage.pages,
             );
           }
-          return Splash(
-            customWidget: Home(),
-          );
+          return LoadingView();
         });
   }
 }

@@ -1,6 +1,6 @@
 import 'package:faker/faker.dart';
 import 'package:flatter_project/colors/colors.dart';
-import 'package:flatter_project/controllers/authControllers.dart';
+import 'package:flatter_project/app/controllers/authControllers.dart';
 import 'package:flutter/material.dart';
 import 'package:flatter_project/widget/CustomIconButton.dart';
 import 'package:flatter_project/widget/textField.dart';
@@ -43,7 +43,7 @@ class _HomeState extends State<Home> {
             floating: true,
             snap: true,
             elevation: 0,
-            expandedHeight: 175.0,
+            expandedHeight: MediaQuery.of(context).size.height / 4.5,
             flexibleSpace: FlexibleSpaceBar(
               background: Container(
                 decoration: BoxDecoration(

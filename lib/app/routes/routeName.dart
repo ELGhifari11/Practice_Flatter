@@ -3,5 +3,6 @@ abstract class Routename {
   static const screenOptions = '/optionButtons';
   static const login = '/login';
   static const register = '/register';
+  static const homeSplash = '/homeSplash';
   static const home = '/home';
 }
